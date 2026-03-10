@@ -37,5 +37,5 @@ Estilo inspirado em sites de venda de veículos como OLX e WebMotors.
 1. Clone o repositório:
 
 ```bash
-git clone https://github.com/SEU_USUARIO/CadastroDeCarros.git
+git clone https://github.com/paulinhodallalana/CadastroDeCarros.git
 cd CadastroDeCarros
