@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Detalhes do Carro</title>
+
+    <style>
+
+        body{
+            font-family:Arial;
+            background:#f5f5f5;
+            margin:0;
+        }
+
+        header{
+            background:#6a0dad;
+            color:white;
+            padding:20px;
+        }
+
+        .container{
+            max-width:1000px;
+            margin:auto;
+            padding:30px;
+        }
+
+        .card{
+            background:white;
+            border-radius:12px;
+            box-shadow:0 5px 20px rgba(0,0,0,0.1);
+            overflow:hidden;
+        }
+
+        .imagem{
+            width:100%;
+            height:400px;
+            object-fit:cover;
+        }
+
+        .info{
+            padding:30px;
+        }
+
+        .titulo{
+            font-size:28px;
+            margin-bottom:10px;
+        }
+
+        .preco{
+            font-size:26px;
+            color:green;
+            font-weight:bold;
+            margin-bottom:20px;
+        }
+
+        .grid{
+            display:grid;
+            grid-template-columns:repeat(2,1fr);
+            gap:15px;
+        }
+
+        .item{
+            background:#f7f7f7;
+            padding:15px;
+            border-radius:8px;
+        }
+
+        .label{
+            font-weight:bold;
+            color:#555;
+        }
+
+        .valor{
+            font-size:16px;
+        }
+
+        .voltar{
+            display:inline-block;
+            margin-top:25px;
+            background:#ff7a00;
+            color:white;
+            padding:12px 20px;
+            border-radius:8px;
+            text-decoration:none;
+        }
+
+        .voltar:hover{
+            background:#e56700;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h2>🚗 Detalhes do Carro</h2>
+</header>
+
+<div class="container">
+
+    <div class="card">
+
+        <img class="imagem" th:src="${carro.imagem}" alt="carro">
+
+        <div class="info">
+
+            <h2 class="titulo"
+                th:text="${carro.marca + ' ' + carro.modelo}">
+            </h2>
+
+            <p class="preco">
+                R$ <span th:text="${carro.preco}"></span>
+            </p>
+
+            <div class="grid">
+
+                <div class="item">
+                    <div class="label">Marca</div>
+                    <div class="valor" th:text="${carro.marca}"></div>
+                </div>
+
+                <div class="item">
+                    <div class="label">Modelo</div>
+                    <div class="valor" th:text="${carro.modelo}"></div>
+                </div>
+
+                <div class="item">
+                    <div class="label">Ano</div>
+                    <div class="valor" th:text="${carro.ano}"></div>
+                </div>
+
+                <div class="item">
+                    <div class="label">Cor</div>
+                    <div class="valor" th:text="${carro.cor}"></div>
+                </div>
+
+                <div class="item">
+                    <div class="label">Placa</div>
+                    <div class="valor" th:text="${carro.placa}"></div>
+                </div>
+
+                <div class="item">
+                    <div class="label">Combustível</div>
+                    <div class="valor" th:text="${carro.tipoDeCombustivel}"></div>
+                </div>
+
+                <div class="item">
+                    <div class="label">Status</div>
+                    <div class="valor" th:text="${carro.status}"></div>
+                </div>
+
+            </div>
+
+            <a href="/ui/carros" class="voltar">
+                ⬅ Voltar para lista
+            </a>
+
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

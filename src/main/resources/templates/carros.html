@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Carros</title>
+
+    <style>
+
+        body{
+            font-family:Arial;
+            background:#f2f2f2;
+            margin:0;
+        }
+
+        header{
+            background:#6a0dad;
+            color:white;
+            padding:20px;
+            display:flex;
+            justify-content:space-between;
+        }
+
+        .btn-add{
+            background: linear-gradient(135deg, #ff7a00, #ff5100);
+            padding: 10px 18px;
+            font-size: 14px;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            display: inline-block;
+            transition: all 0.25s ease;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+
+        .btn-add:hover{
+            background: linear-gradient(135deg, #ff8c1a, #ff5c1a);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 14px rgba(0,0,0,0.25);
+        }
+
+        .btn-add:active{
+            transform: scale(0.96);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+        }
+
+        .container{
+            display:grid;
+            grid-template-columns:repeat(auto-fill,minmax(250px,1fr));
+            gap:20px;
+            padding:30px;
+        }
+
+        .card{
+            background:white;
+            border-radius:10px;
+            box-shadow:0 4px 10px rgba(0,0,0,0.1);
+            overflow:hidden;
+        }
+
+        .card img{
+            width:100%;
+            height:160px;
+            object-fit:cover;
+        }
+
+        .info{
+            padding:15px;
+        }
+
+        .preco{
+            color:green;
+            font-size:20px;
+            font-weight:bold;
+        }
+
+        .botoes{
+            display:flex;
+            gap:10px;
+            margin-top:10px;
+        }
+
+        .botoes button{
+            flex:1;
+            border:none;
+            padding:8px;
+            border-radius:5px;
+            cursor:pointer;
+        }
+
+        .editar{
+            background:orange;
+        }
+
+        .detalhes{
+            background:#0077ff;
+            color:white;
+        }
+
+        .detalhes:hover{
+            background:#005ed1;
+        }
+
+        .deletar{
+            background:red;
+            color:white;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<header>
+
+    <h1>🚗 Carros</h1>
+
+    <a href="/ui/carros/adicionar" class="btn-add">
+        + Adicionar carro
+    </a>
+
+</header>
+
+<div class="container">
+
+    <div class="card" th:each="carro : ${carros}">
+
+        <img th:src="${carro.imagem}" alt="carro">
+
+        <div class="info">
+
+            <h3 th:text="${carro.marca + ' ' + carro.modelo}"></h3>
+
+            <p>
+                <span th:text="${carro.ano}"></span> •
+                <span th:text="${carro.tipoDeCombustivel}"></span>
+            </p>
+
+            <p class="preco">
+                R$ <span th:text="${carro.preco}"></span>
+            </p>
+
+            <div class="botoes">
+
+                <form th:action="@{'/ui/carros/detalhes/' + ${carro.id}}" method="get">
+                    <button type="submit" class="detalhes">
+                        Detalhes
+                    </button>
+                </form>
+
+                <form th:action="@{'/ui/carros/editar/' + ${carro.id}}" method="get">
+                    <button class="editar">
+                        Atualizar
+                    </button>
+                </form>
+
+                <form th:action="@{'/ui/carros/deletar/' + ${carro.id}}" method="post">
+                    <button class="deletar">
+                        Deletar
+                    </button>
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

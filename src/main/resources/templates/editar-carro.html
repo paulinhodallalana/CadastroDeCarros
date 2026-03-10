@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Carro</title>
+
+    <style>
+        /* Mantém o mesmo estilo do formulário de adicionar */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Arial', sans-serif; background: #f6f6f6; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+        .container { width: 450px; background: #ffffff; padding: 30px 40px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); transition: transform 0.2s; }
+        .container:hover { transform: translateY(-3px); }
+        h2 { text-align: center; color: #ff6600; margin-bottom: 25px; font-size: 26px; }
+        form label { display: block; margin-bottom: 5px; font-weight: bold; color: #333; margin-top: 15px; }
+        input, select { width: 100%; padding: 12px 15px; margin-bottom: 10px; border-radius: 8px; border: 1px solid #ccc; font-size: 14px; transition: border 0.2s, box-shadow 0.2s; }
+        input:focus, select:focus { border-color: #ff6600; box-shadow: 0 0 5px rgba(255,102,0,0.4); outline: none; }
+        button { width: 100%; padding: 14px; background: #ff6600; color: #fff; font-size: 16px; font-weight: bold; border: none; border-radius: 10px; cursor: pointer; transition: background 0.3s, transform 0.2s; margin-top: 15px; }
+        button:hover { background: #e55b00; transform: scale(1.02); }
+        select { appearance: none; -webkit-appearance: none; -moz-appearance: none; background: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"><polygon points="0,0 16,0 8,8" style="fill:%23ff6600"/></svg>') no-repeat right 12px center; background-size: 12px; }
+    </style>
+
+</head>
+<body>
+
+<div class="container">
+
+    <h2>Editar Carro</h2>
+
+    <form th:action="@{'/ui/carros/alterar/' + ${carro.id}}" method="post">
+        <input type="hidden" name="_method" value="put"/> <!-- Simula PUT no Thymeleaf -->
+
+        <label>Marca</label>
+        <input name="marca" placeholder="Marca" th:value="${carro.marca}" required>
+
+        <label>Modelo</label>
+        <input name="modelo" placeholder="Modelo" th:value="${carro.modelo}" required>
+
+        <label>Ano</label>
+        <input name="ano" type="number" min="1886" placeholder="Ano" th:value="${carro.ano}" required>
+
+        <label>Cor</label>
+        <input name="cor" placeholder="Cor" th:value="${carro.cor}" required>
+
+        <label>Placa</label>
+        <input name="placa" maxlength="8" placeholder="Placa" th:value="${carro.placa}" required>
+
+        <label>Combustível</label>
+        <select name="tipoDeCombustivel" required>
+
+            <option value="GASOLINA">Gasolina</option>
+            <option value="ETANOL">Etanol</option>
+            <option value="DIESEL">Diesel</option>
+            <option value="ELETRICO">Elétrico</option>
+            <option value="GNJ">GNV</option>
+            <option value="HIBRIDO">Híbrido</option>
+
+        </select>
+
+        <label>Status</label>
+        <select name="status" required>
+            <option value="" disabled>Selecione</option>
+            <option value="DISPONÍVEL" th:selected="${carro.status=='DISPONÍVEL'}">Disponível</option>
+            <option value="VENDIDO" th:selected="${carro.status=='VENDIDO'}">Vendido</option>
+            <option value="RESERVADO" th:selected="${carro.status=='RESERVADO'}">Reservado</option>
+        </select>
+
+        <label>Preço</label>
+        <input name="preco" type="number" min="0" step="0.01" placeholder="Preço" th:value="${carro.preco}" required>
+
+        <label>Imagem</label>
+        <input name="imagem" placeholder="Imagem" th:value="${carro.imagem}">
+
+        <button>Salvar Alterações</button>
+    </form>
+
+</div>
+
+</body>
+</html>

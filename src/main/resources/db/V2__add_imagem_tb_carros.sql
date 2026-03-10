@@ -1,0 +1,2 @@
+ALTER TABLE tb_carros
+    ADD COLUMN imagem VARCHAR(255);
